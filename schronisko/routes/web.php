@@ -47,8 +47,8 @@ Route::get('/rejstracja', [UsersController::class, 'index1'])->name('auth.rejstr
 
 Route::post('/rejstracja', [UsersController::class, 'store'])->name('auth.rejstracja');
 
-Route::get('/login', [AuthController::class, 'loginForm'])->name('auth.login');
-Route::post('/login', [AuthController::class, 'login']);
+Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
