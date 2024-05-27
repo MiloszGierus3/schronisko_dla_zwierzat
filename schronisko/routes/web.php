@@ -12,17 +12,17 @@ use App\Http\Controllers\AuthController;
  //   return view('welcome');
 //});
 
-//dodyczące zwierząt
+//dodyczące zwierząt //->middleware('auth')
 Route::controller(ZwierzakiController::class)->group(function () {
 Route::get('/zwierzeta', 'index')->name('schronisko.zwierzeta');
-Route::get('/zwierzeta/create', 'create')->name('schronisko.dodaj');
+Route::get('/zwierzeta/create', 'create')->middleware('auth')->name('schronisko.dodaj');
 Route::post('/zwierzeta/store',  'store')->name('schronisko.store');
-Route::get('/zwierzeta/{id}/edit',  'edit')->name('schronisko.edit');
+Route::get('/zwierzeta/{id}/edit',  'edit')->middleware('auth')->name('schronisko.edit');
 Route::put('/zwierzeta/{zwierzak}',  'update')->name('schronisko.update');
-Route::delete('/zwierzeta/{id}', 'delete')->name('schronisko.delete');
+Route::delete('/zwierzeta/{id}', 'delete')->middleware('auth')->name('schronisko.delete');
 Route::get('/zwierzeta/{id}/adoptuj',  'adoptuj')->name('schronisko.adoptuj');
 Route::get('/zwierzeta/zaadoptowane',  'zaadoptowane')->name('schronisko.zaadoptowane');
-Route::delete('/zwierzeta/{id}/usun-adopcje', 'usunAdopcje')->name('schronisko.usunAdopcje');
+Route::delete('/zwierzeta/{id}/usun-adopcje', 'usunAdopcje')->middleware('auth')->name('schronisko.usunAdopcje');
 });
 
 //zrobic aby przekazywało zwierzakicontroller i opiekunowiecontroller aby możliwe było wyświetlenie opiekunów
