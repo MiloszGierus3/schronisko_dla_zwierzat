@@ -8,6 +8,7 @@ use App\Http\Controllers\PochodzenieController;
 use App\Http\Controllers\OpiekunowieController;
 use App\Http\Controllers\AuthController;
 
+
 //Route::get('/', function () {
  //   return view('welcome');
 //});
@@ -20,7 +21,7 @@ Route::post('/zwierzeta/store',  'store')->name('schronisko.store');
 Route::get('/zwierzeta/{id}/edit',  'edit')->middleware('auth')->name('schronisko.edit');
 Route::put('/zwierzeta/{zwierzak}',  'update')->name('schronisko.update');
 Route::delete('/zwierzeta/{id}', 'delete')->middleware('auth')->name('schronisko.delete');
-Route::get('/zwierzeta/{id}/adoptuj',  'adoptuj')->name('schronisko.adoptuj');
+Route::get('/zwierzeta/{id}/adoptuj',  'adoptuj')->middleware('auth')->name('schronisko.adoptuj');
 Route::get('/zwierzeta/zaadoptowane',  'zaadoptowane')->name('schronisko.zaadoptowane');
 Route::delete('/zwierzeta/{id}/usun-adopcje', 'usunAdopcje')->middleware('auth')->name('schronisko.usunAdopcje');
 });

@@ -58,14 +58,22 @@ public function show($id)
 //tworzy nowego zwierzaka
 public function create()
     {
-        
-        return view('schronisko.dodaj');
+        $user = Auth::user();
+
+
+        if ($user && ($user->id === 1)) {
+            return view('schronisko.dodaj');
+        } else {
+            
+            return redirect()->route('auth.login')->with('alert', 'Brak uprawnień administratora');
+        }
+       // return view('schronisko.dodaj');
     }
 
     public function store(Request $request)
     {
 
-        
+        //$user = auth()->user();
 
           $user = Auth::user();
         // Walidacja danych wejściowych
@@ -133,8 +141,18 @@ public function create()
 
     public function edit($id)
     {
+        
         $zwierzak = Zwierzaki::findOrFail($id);
-        return view('schronisko.edit', compact('zwierzak'));
+        $user = Auth::user();
+
+
+        if ($user && ($user->id === 1)) {
+            return view('schronisko.edit', compact('zwierzak'));
+        } else {
+            
+            return redirect()->route('auth.login')->with('alert', 'Brak uprawnień administratora');
+        }
+       // return view('schronisko.edit', compact('zwierzak'));
     }
 
     public function update(Request $request, $id)
@@ -179,10 +197,20 @@ public function create()
 
 public function delete($id)
 {
-    $zwierzak = Zwierzaki::findOrFail($id);
-    $zwierzak->delete();
+   // $zwierzak = Zwierzaki::findOrFail($id);
+   // $zwierzak->delete();
+   $zwierzak = Zwierzaki::findOrFail($id);
+   $user = Auth::user();
 
-    return redirect()->route('schronisko.zwierzeta')->with('delete', 'Zwierzak został usunięty.');
+
+   if ($user && ($user->id === 1)) {
+            $zwierzak->delete();
+            return redirect()->route('schronisko.zwierzeta')->with('delete', 'Zwierzak został usunięty.');
+   } else {
+       
+       return redirect()->route('auth.login')->with('alert', 'Brak uprawnień administratora');
+   }
+   // return redirect()->route('schronisko.zwierzeta')->with('delete', 'Zwierzak został usunięty.');
 }
 
 
