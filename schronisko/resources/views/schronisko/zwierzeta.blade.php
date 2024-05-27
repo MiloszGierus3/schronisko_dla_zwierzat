@@ -63,7 +63,7 @@
     @if (!$zwierz->status_adopcji)
         <div class="col d-flex align-items-stretch">
             <div class="card h-100">
-                <img src="{{ asset('storage/img' . $zwierz->img) }}" class="card-img-top" alt="{{ $zwierz->imię }}">
+                <img src="{{ asset('storage/img/' . $zwierz->img) }}" class="card-img-top" alt="{{ $zwierz->imię }}">
                 <div class="card-body">
                     <h5 class="card-title text-center">{{ $zwierz->imię }}</h5>
                     <ul class="list-unstyled">
